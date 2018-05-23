@@ -38,14 +38,17 @@
       0 5px 13px 0 rgba(77,111,155,0.20);
   }
 
-  .js-female {
+  .js-toggle {
     color: white;
-    background-color: #FF345E;
+    background-color: #333;
     border-radius: 4px;
     padding: 0 4px;
   }
 
-  .js-female:hover {
+  .js-female { background-color: #FF345E; }
+  .js-male {   background-color: #295BE6; }
+
+  .js-toggle:hover {
     cursor: pointer;
   }
 
@@ -94,6 +97,9 @@
   .js-toggle:active {
     transform: translateY(2px);
   }
+  .js-bar {
+    transition: all 1s ease-in-out;
+  }
 
   </style>
 </head>
@@ -101,10 +107,12 @@
 <body class="py4 bg-silver">
 {{ content }}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
 <script>
   // Open the popup on clicked word
   $('.js-toggle').click(function() {
-    $('.js-hover').toggleClass('open');
+    var popup = $(this).parents('.js-word').children('.js-hover');
+    popup.toggleClass('open');
   });
 
   // Word replacement from within the popup
@@ -112,11 +120,14 @@
     var replacement = $(this).text();
     var word = $(this).parents('.js-word').children('.js-toggle');
     var popup = $(this).parents('.js-word').children('.js-hover');
+    var width = Math.floor(Math.random() * 100);
 
     word.text(replacement);
     popup.removeClass('open');
-    $('.js-feminine-bar').attr('style', 'width: 50%');
+
+    $('.js-feminine-bar').attr('style', 'width:' + width + '%');
   });
+
 </script>
 </body>
 
