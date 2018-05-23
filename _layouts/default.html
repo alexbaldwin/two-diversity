@@ -1,0 +1,123 @@
+---
+---
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>{{ page.title }}</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://unpkg.com/basscss@8.0.2/css/basscss.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+    }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 400;
+    }
+    p, li {
+      line-height: 1.5;
+    }
+    .bg-silver { background-color: #F5F6F7; }
+    .bg-white { background-color: #FFF; }
+    .bg-red { background-color: #FF345E; }
+    .bg-blue { background-color: #295BE6; }
+
+    .silver { color: #F5F6F7; }
+    .white { color: #FFF; }
+    .red { color: #FF345E; }
+    .blue { color: #295BE6; }
+      .shadow {
+    box-shadow:
+      0 1px 1px 0 rgba(51,79,115,0.13),
+      0 1px 4px 0 rgba(63,90,125,0.20),
+      0 5px 13px 0 rgba(77,111,155,0.20);
+  }
+
+  .js-female {
+    color: white;
+    background-color: #FF345E;
+    border-radius: 4px;
+    padding: 0 4px;
+  }
+
+  .js-female:hover {
+    cursor: pointer;
+  }
+
+  .js-word {
+    position: relative;
+    display: inline;
+  }
+
+  .js-hover {
+    position: absolute;
+    width: 10rem;
+    z-index: 2;
+    top: 1.5rem;
+    left: -50%;
+    padding: 0.75rem 1.5rem;
+    background: white;
+    box-shadow:
+      0 1px 1px 0 rgba(51,79,115,0.13),
+      0 1px 4px 0 rgba(63,90,125,0.20),
+      0 5px 13px 0 rgba(77,111,155,0.20);
+    transform: translateY(-50%) translateX(-25%) scale(0.75);
+    transition: all .18s ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .js-hover.open {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .muted {
+    opacity: 0.5;
+  }
+
+  .button {
+    width: 100%;
+    text-decoration: none;
+    border: 1px solid currentColor;
+    display: inline-block;
+    text-align: center;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+  }
+
+  .js-toggle:active {
+    transform: translateY(2px);
+  }
+
+  </style>
+</head>
+
+<body class="py4 bg-silver">
+{{ content }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  // Open the popup on clicked word
+  $('.js-toggle').click(function() {
+    $('.js-hover').toggleClass('open');
+  });
+
+  // Word replacement from within the popup
+  $('.js-suggest').click(function() {
+    var replacement = $(this).text();
+    var word = $(this).parents('.js-word').children('.js-toggle');
+    var popup = $(this).parents('.js-word').children('.js-hover');
+
+    word.text(replacement);
+    popup.removeClass('open');
+    $('.js-feminine-bar').attr('style', 'width: 50%');
+  });
+</script>
+</body>
+
+</html>
